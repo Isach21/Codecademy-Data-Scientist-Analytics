@@ -1,0 +1,40 @@
+import pandas as pd
+
+# Read in the census dataframe
+census = pd.read_csv('census_data.csv', index_col=0)
+
+#Inspecting the Data
+print(census.head())
+print(census.dtypes)
+
+#average birth year of the respondents
+print(census['birth_year'].unique())
+census["birth_year"] = census["birth_year"].replace("missing", "1967")
+#print(census['birth_year'].unique())
+census["birth_year"] = census["birth_year"].astype("int32")
+#print(census.dtypes)
+print(census.birth_year.mean())
+
+#set an order to the higher_tax variable
+census["higher_tax"] = pd.Categorical(census["higher_tax"], ["strongly disagree", "disagree", "neutral", "agree", "strongly agree"], ordered = True)
+print(census.higher_tax.unique())
+#The median sentiment of the respondents on the issue of higher taxes for the wealthy. 
+census['higher_tax'] = census['higher_tax'].astype('category').cat.codes
+print(census['higher_tax'].median())
+#The median sentiment is neutral 
+
+#One-Hot Encode marital_status
+census_1 = pd.get_dummies(census, columns=['marital_status'])
+print(census.head())
+#Create a new variable called marital_codes by Label Encoding the marital_status variable.
+census["marital_codes"] = census["marital_status"].astype("category").cat.codes
+census['higher_tax'] = census['higher_tax'].astype('category').cat.codes
+print(census.head())
+
+#Create a new variable called age_group, which groups respondents based on their birth year.
+census["age"] = 2024 - census["birth_year"]
+bins = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+labels = [f'{i}-{i+5}' for i in range(15, 100, 5)]
+census['age_group'] = pd.cut(census['age'], bins=bins, labels=labels, right=False)
+census['age_group_codes'] = census['age_group'].astype('category').cat.codes
+print(census.head())
