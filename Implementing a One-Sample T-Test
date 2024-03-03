@@ -1,0 +1,27 @@
+from scipy.stats import ttest_1samp
+import numpy as np
+
+daily_prices = np.genfromtxt("daily_prices.csv", delimiter=",")
+print(daily_prices)
+
+tstat, pval = ttest_1samp(daily_prices[0], 1000)
+
+print(pval)
+p_values = []
+for i in range(10): 
+  tstat, pval = ttest_1samp(daily_prices[i], 1000)
+  p_values.append(round(pval, 2))
+  print("day",i+1, "p-value:")
+  print(round(pval, 2))
+
+#print(p_values)
+
+print(pval)
+p_values = []
+for i in range(10): 
+  tstat, pval = ttest_1samp(daily_prices[i], 950)
+  p_values.append(round(pval, 2))
+  print("day",i+1, "p-value:")
+  print(round(pval, 2))
+
+#print(p_values)
