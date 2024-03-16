@@ -1,0 +1,28 @@
+from matplotlib import pyplot as plt
+#x =  years, y1 = marriages, y2 =  births
+x = [2022,	2021,	2020,	2019,	2018,	2017,	2016,	2015,	2014,	2013,	2012,	2011,	2010,	2009,	2008,	2007,	2006,	2005,	2004,	2003,	2002,	2001,	2000,	1999,	1998,	1997,	1996,	1995,	1994,	1993,	1992]
+
+y1  = [179107,	148588,	90670,	166530,	167613,	173626,	175343,	168910,	162554, 156446,	168556,	163338,	170440,	177144,	197216,	204772,	207766,	209415,	216149,	212300,	211522,	208057,	216451,	208129,	207041,	196499,	194084,	200688,	199731,	201463,	217512]
+
+y2  = [329251,	337380,	341315,	360617,	372777,	393181,	410583,	420290,	427595,	425715,	454648,	471999,	486575,	494997,	519779,	492527,	482957,	466371,	454591,	441881,	418846,	406380,	397632,	380130,	365193,	369035,	362626,	363469,	370148,	385786,	396747]
+
+# years vs marriages
+plt.subplot(2,1,1)
+plt.plot(x, y1, color= "gray",  marker='o')
+plt.plot(x,y2, color="pink",  marker='o')
+plt.xlabel("Years")
+plt.title("Births vs Marriages Spain")
+plt.legend(["Marriages", "Births"], loc = 1)
+
+plt.subplot(2, 2, 3)
+plt.plot(x, y1, color= "gray",  marker='o')
+plt.xlabel("Years")
+plt.title("Marriages in Spain since 1992")
+
+plt.subplot(2,2,4)
+plt.plot(x, y2, color = "pink", marker= "o")
+plt.xlabel("Years")
+plt.title("Births in Spain since 1992")
+plt.subplots_adjust(wspace =0.5, hspace = 0.5)
+plt.show()
+
